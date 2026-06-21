@@ -1,0 +1,34 @@
+name: FlightTracker
+options:
+  bundleIdPrefix: com.skyskanner
+targets:
+  FlightTracker:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.2"
+    sources:
+      - path: Sources/FlightTracker
+    settings:
+      TARGETED_DEVICE_FAMILY: "1"
+      CODE_SIGNING_ALLOWED: NO
+    info:
+      plist:
+        NSSupportsLiveActivities: true
+        NSLocationWhenInUseUsageDescription: "We need your location coordinates to match against global ADS-B flight feeds overhead."
+        UILaunchScreen: {}
+    dependencies:
+      - target: FlightTrackerWidget
+  FlightTrackerWidget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.2"
+    sources:
+      - path: Sources/FlightTrackerWidget
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.skyskanner.FlightTracker.Widget
+      TARGETED_DEVICE_FAMILY: "1"
+      CODE_SIGNING_ALLOWED: NO
+    info:
+      plist:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
